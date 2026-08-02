@@ -1,0 +1,103 @@
+# Log started 2025-01-07 15:35
+# Record of session commands.  Please note that this will
+# likely require editing if it is to be run as a script.
+open \
+  "E:\UniBo\Econometrics for Financial Markets\Project\Hassanzadeh_Reza.csv"
+adf 16 gdp --c --ct --test-down=AIC
+gnuplot gdp --time-series --with-lines
+gnuplot infl --time-series --with-lines
+gnuplot rate --time-series --with-lines
+gnuplot gdp --time-series --with-lines
+var 24 gdp infl rate --lagselect
+var 12 gdp infl rate
+var 1 gdp infl rate
+var 24 gdp infl rate --lagselect
+var 1 gdp infl rate
+modtest 12 --autocorr
+modtest 12 --autocorr
+modtest --normality
+modtest 12 --arch
+var 2 gdp infl rate
+modtest --normality
+modtest 12 --arch
+modtest 12 --autocorr
+logs rate
+gnuplot rate --time-series --with-lines
+gnuplot l_rate --time-series --with-lines
+gnuplot l_rate --time-series --with-lines
+delete l_rate
+logs rate
+gnuplot l_rate --time-series --with-lines
+delete l_rate
+logs rate
+modtest 12 --autocorr
+modtest 12 --arch
+modtest --normality
+modtest --normality
+modtest --normality
+modtest 12 --autocorr
+var 3 gdp infl rate
+modtest 12 --autocorr
+modtest 12 --arch
+modtest --normality
+var 4 gdp infl rate
+adf 16 gdp --c --ct --test-down=AIC
+adf 16 infl --c --ct --test-down=AIC
+adf 16 rate --c --ct --test-down=AIC
+delete l_rate
+kpss 5 rate
+kpss 5 rate --difference
+diff rate
+var 8 gdp infl d_rate --lagselect
+var 3 gdp infl d_rate
+modtest 12 --autocorr
+modtest --normality
+modtest 12 --arch
+var 2 gdp infl d_rate
+modtest 12 --autocorr
+modtest 12 --arch
+modtest --normality
+var 1 gdp infl d_rate
+modtest 12 --autocorr
+modtest 12 --arch
+modtest --normality
+ldiff rate
+delete ld_rate
+list Y = infl rate gdp
+btmp___0 = GUI_SVAR(1, Y, null, 1, 0, 0, 1, 0, null, null, 0, 0.9, 0, 1, \
+  0, null, 4)
+corrgm gdp 26
+summary gdp infl --simple
+gnuplot gdp infl --time-series --with-lines
+gnuplot gdp rate --time-series --with-lines
+var 12 gdp rate --lagselect
+coint 2 gdp rate --test-down
+var 12 rate infl --lagselect
+var 2 rate infl --lagselect
+var 12 rate infl --lagselect
+coint 1 rate gdp
+var 12 rate gdp --lagselect
+coint 1 rate gdp
+coint 2 rate gdp --verbose
+coint 1 rate gdp
+coint 2 rate infl
+corrgm gdp 26
+corrgm infl 26
+corrgm rate 26
+corrgm rate 26
+corrgm gdp 26
+corrgm rate 26
+corrgm infl 26
+corrgm gdp 26
+corrgm infl 26
+corrgm rate 26
+corrgm infl 26
+corrgm infl 26
+corrgm gdp 26
+# model 7
+arima 2 0 2 ; infl
+# model 8
+arima 2 0 1 ; infl
+modtest --normality
+modtest --autocorr 12
+modtest 12 --arch
